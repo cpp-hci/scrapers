@@ -2,6 +2,10 @@
 
 Scrapers should all extend the WebScraper class which supports Object based output as well as JSON based output. These methods have a couple of thrown exceptions. TooManyResultsException will be thrown is scraping resulted in more than one professor being found. NoResultsException will be thrown if the query didn't find any professors, and IOException will be thrown from network troubles.
 
+### Usage
+
+You can download the code and builder the jar using the maven jar, but a simpler method is to use [jitpack.io](https://jitpack.io/#cpp-hci/scrapers/-SNAPSHOT) to include this repo as a dependency for your project.
+
 ### ratemyprofessors.com
 
 Use the RateMyProfessorWebScaper to scrape for results from rmp. Note the school formatting is very specific for rmp so you must use a constant from the School enum.
