@@ -57,7 +57,7 @@ public class RateMyProfessorWebScaper extends WebScraper<RateMyProfessorProfesso
 
     private RateMyProfessorProfessorDTO fetchProfessorData(int professorID) throws IOException {
         RateMyProfessorProfessorDTOBuilder professorBuilder = new RateMyProfessorProfessorDTOBuilder().setId(professorID);
-        int remaining, page = 0;
+        int remaining, page = 1;
         do {
             RateMyProfessorResultRawJsonDTO result = fetchRawProfessorData(professorID, page);
             result.getRatings().stream()
