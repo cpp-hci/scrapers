@@ -3,15 +3,15 @@ package edu.cpp.hci.scrapers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cpp.hci.scrapers.constants.School;
 import edu.cpp.hci.scrapers.exceptions.NoResultsException;
-import edu.cpp.hci.scrapers.exceptions.TooManyResultsException;
 
 import java.io.IOException;
+import java.util.List;
 
 public abstract class WebScraper<E extends Professor> {
     private String professor;
     private String school;
     private String json;
-    private E data;
+    private List<E> data;
 
     public WebScraper(String professor, School school) {
         this.professor = professor;
@@ -27,7 +27,7 @@ public abstract class WebScraper<E extends Professor> {
         return professor;
     }
 
-    public void setProfessor(String professor) throws TooManyResultsException, NoResultsException, IOException {
+    public void setProfessor(String professor) throws NoResultsException, IOException {
         this.professor = professor;
         refresh();
     }
@@ -36,35 +36,35 @@ public abstract class WebScraper<E extends Professor> {
         return school;
     }
 
-    public void setSchool(String school) throws TooManyResultsException, NoResultsException, IOException {
+    public void setSchool(String school) throws NoResultsException, IOException {
         this.school = school;
         refresh();
     }
 
-    public void setSchool(School school) throws TooManyResultsException, NoResultsException, IOException {
+    public void setSchool(School school) throws NoResultsException, IOException {
         this.school = school.toString();
         refresh();
     }
 
-    public String getJson() throws TooManyResultsException, NoResultsException, IOException {
+    public String getJson() throws NoResultsException, IOException {
         if (json == null) {
             refresh();
         }
         return json;
     }
 
-    public E getData() throws TooManyResultsException, NoResultsException, IOException {
+    public List<E> getData() throws NoResultsException, IOException {
         if (data == null) {
             refresh();
         }
         return data;
     }
 
-    public void refresh() throws TooManyResultsException, NoResultsException, IOException {
+    public void refresh() throws NoResultsException, IOException {
         data = fetch();
         json = new ObjectMapper().writeValueAsString(data);
     }
 
-    public abstract E fetch() throws TooManyResultsException, NoResultsException, IOException;
+    public abstract List<E> fetch() throws NoResultsException, IOException;
 
 }

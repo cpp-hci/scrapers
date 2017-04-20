@@ -4,12 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cpp.hci.scrapers.WebScraper;
 import edu.cpp.hci.scrapers.constants.School;
 import edu.cpp.hci.scrapers.exceptions.NoResultsException;
-import edu.cpp.hci.scrapers.exceptions.TooManyResultsException;
 import edu.cpp.hci.scrapers.rmp.dto.professor.RateMyProfessorProfessorDTO;
 import edu.cpp.hci.scrapers.rmp.dto.professor.RateMyProfessorProfessorDTOBuilder;
 import edu.cpp.hci.scrapers.rmp.dto.rating.RateMyProfessorRatingDTOBuilder;
 import edu.cpp.hci.scrapers.rmp.exceptions.RateMyProfessorNoResultsException;
-import edu.cpp.hci.scrapers.rmp.exceptions.RateMyProfessorTooManyResultsException;
 import edu.cpp.hci.scrapers.rmp.json.RateMyProfessorResultRawJsonDTO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,6 +16,9 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RateMyProfessorWebScaper extends WebScraper<RateMyProfessorProfessorDTO> {
     private final static String HOSTNAME = "https://www.ratemyprofessors.com";
@@ -30,17 +31,16 @@ public class RateMyProfessorWebScaper extends WebScraper<RateMyProfessorProfesso
         super(professor, school);
     }
 
-    private int fetchProfessorID() throws IOException,
-            RateMyProfessorTooManyResultsException, RateMyProfessorNoResultsException {
+    private List<Integer> fetchProfessorID() throws IOException, RateMyProfessorNoResultsException {
         Document connection = fetchQueryConnection(getProfessor(), getSchool());
         Elements elements = connection.select("a[href*=" + SHOW_RATINGS_URL + "]");
-        if (elements.size() > 1) {
-            throw new RateMyProfessorTooManyResultsException();
-        }
         if (elements.size() < 1) {
             throw new RateMyProfessorNoResultsException();
         }
-        return Integer.parseInt(elements.get(0).attr("href").substring(SHOW_RATINGS_URL.length()));
+        return elements.stream()
+            .map(item -> item.attr("href").substring(SHOW_RATINGS_URL.length()))
+            .map(Integer::new)
+            .collect(Collectors.toList());
     }
 
     private Document fetchQueryConnection(String professor, String school) throws IOException {
@@ -49,10 +49,14 @@ public class RateMyProfessorWebScaper extends WebScraper<RateMyProfessorProfesso
     }
 
     @Override
-    public RateMyProfessorProfessorDTO fetch()
-            throws TooManyResultsException, NoResultsException, IOException {
-        int professorID = fetchProfessorID();
-        return fetchProfessorData(professorID);
+    public List<RateMyProfessorProfessorDTO> fetch()
+            throws NoResultsException, IOException {
+        List<Integer> professorIDs = fetchProfessorID();
+        List<RateMyProfessorProfessorDTO> profs = new ArrayList<>();
+        for (Integer professorID : professorIDs) {
+            profs.add(fetchProfessorData(professorID));
+        }
+        return profs;
     }
 
     private RateMyProfessorProfessorDTO fetchProfessorData(int professorID) throws IOException {
