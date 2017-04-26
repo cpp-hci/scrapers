@@ -1,46 +1,48 @@
 package edu.cpp.hci.scrapers.rmp.dto.professor;
 
+import edu.cpp.hci.scrapers.rmp.dto.professor.impl.RateMyProfessorProfessor;
+import edu.cpp.hci.scrapers.rmp.dto.rating.impl.RateMyProfessorRating;
 import edu.cpp.hci.scrapers.rmp.dto.rating.RateMyProfessorRatingDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
 
-public class RateMyProfessorProfessorDTOBuilder {
+public class RateMyProfessorProfessorBuilder {
     private int id;
     private double overallQuality;
     private double levelOfDifficulty;
     private double wouldTakeAgain;
     private List<RateMyProfessorRatingDTO> ratings;
 
-    public RateMyProfessorProfessorDTOBuilder setId(int id) {
+    public RateMyProfessorProfessorBuilder setId(int id) {
         this.id = id;
         return this;
     }
 
-    public RateMyProfessorProfessorDTOBuilder setOverallQuality(double overallQuality) {
+    public RateMyProfessorProfessorBuilder setOverallQuality(double overallQuality) {
         this.overallQuality = overallQuality;
         return this;
     }
 
-    public RateMyProfessorProfessorDTOBuilder setLevelOfDifficulty(double levelOfDifficulty) {
+    public RateMyProfessorProfessorBuilder setLevelOfDifficulty(double levelOfDifficulty) {
         this.levelOfDifficulty = levelOfDifficulty;
         return this;
     }
 
-    public RateMyProfessorProfessorDTOBuilder setWouldTakeAgain(double wouldTakeAgain) {
+    public RateMyProfessorProfessorBuilder setWouldTakeAgain(double wouldTakeAgain) {
         this.wouldTakeAgain = wouldTakeAgain;
         return this;
     }
 
-    public RateMyProfessorProfessorDTOBuilder setRatings(List<RateMyProfessorRatingDTO> ratings) {
+    public RateMyProfessorProfessorBuilder setRatings(List<RateMyProfessorRatingDTO> ratings) {
         this.ratings = ratings;
         return this;
     }
 
-    public RateMyProfessorProfessorDTOBuilder withReview(RateMyProfessorRatingDTO review) {
+    public RateMyProfessorProfessorBuilder withReview(RateMyProfessorRatingDTO review) {
         if (ratings == null) {
-            ratings = new ArrayList<RateMyProfessorRatingDTO>();
+            ratings = new ArrayList<>();
         }
         ratings.add(review);
         return this;
@@ -69,7 +71,7 @@ public class RateMyProfessorProfessorDTOBuilder {
                 }
             }
         }
-        return new RateMyProfessorProfessorDTO(id, overallQuality, levelOfDifficulty, wouldTakeAgain, ratings);
+        return new RateMyProfessorProfessor(id, overallQuality, levelOfDifficulty, wouldTakeAgain, ratings);
     }
 
     public int wouldTakeAgainToInt(String wouldTakeAgain) {

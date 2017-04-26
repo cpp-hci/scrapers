@@ -12,7 +12,7 @@ Use the RateMyProfessorWebScaper to scrape for results from rmp. Note the school
 
 ````java
 import edu.cpp.hci.scrapers.rmp.RateMyProfessorWebScaper;
-import edu.cpp.hci.scrapers.rmp.dto.professor.RateMyProfessorProfessorDTO;
+import edu.cpp.hci.scrapers.rmp.dto.professor.impl.RateMyProfessorProfessor;
 import edu.cpp.hci.scrapers.constants.School;
 import edu.cpp.hci.scrapers.exceptions.NoResultsException;
 

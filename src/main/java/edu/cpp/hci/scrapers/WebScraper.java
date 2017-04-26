@@ -7,7 +7,7 @@ import edu.cpp.hci.scrapers.exceptions.NoResultsException;
 import java.io.IOException;
 import java.util.List;
 
-public abstract class WebScraper<E extends Professor> {
+public abstract class WebScraper<E extends ProfessorDTO> {
     private String professor;
     private String school;
     private String json;

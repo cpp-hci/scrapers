@@ -2,164 +2,64 @@ package edu.cpp.hci.scrapers.rmp.dto.rating;
 
 import java.util.List;
 
-public class RateMyProfessorRatingDTO {
-    private int id;
-    private String date;
-    private String description;
-    private int overallQuality;
-    private int levelOfDifficulty;
-    private String className;
-    private String forCredit;
-    private String attendance;
-    private String textBookUsed;
-    private String wouldTakeAgain;
-    private String gradeReceived;
-    private List<String> tags;
-    private String ratingText;
-    private int foundHelpful;
-    private int foundUnhelpful;
+public interface RateMyProfessorRatingDTO {
+    int getId();
 
-    public RateMyProfessorRatingDTO(int id, String date, String description, int overallQuality,
-                                    int levelOfDifficulty, String className, String forCredit, String attendance,
-                                    String textBookUsed, String wouldTakeAgain, String gradeReceived, List<String> tags,
-                                    String ratingText, int foundHelpful, int foundUnhelpful) {
-        this.id = id;
-        this.date = date;
-        this.description = description;
-        this.overallQuality = overallQuality;
-        this.levelOfDifficulty = levelOfDifficulty;
-        this.className = className;
-        this.forCredit = forCredit;
-        this.attendance = attendance;
-        this.textBookUsed = textBookUsed;
-        this.wouldTakeAgain = wouldTakeAgain;
-        this.gradeReceived = gradeReceived;
-        this.tags = tags;
-        this.ratingText = ratingText;
-        this.foundHelpful = foundHelpful;
-        this.foundUnhelpful = foundUnhelpful;
-    }
+    void setId(int id);
 
-    public RateMyProfessorRatingDTO() {
-    }
+    String getDate();
 
-    public int getId() {
-        return id;
-    }
+    void setDate(String date);
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    String getDescription();
 
-    public String getDate() {
-        return date;
-    }
+    void setDescription(String description);
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+    int getOverallQuality();
 
-    public String getDescription() {
-        return description;
-    }
+    void setOverallQuality(int overallQuality);
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    int getLevelOfDifficulty();
 
-    public int getOverallQuality() {
-        return overallQuality;
-    }
+    void setLevelOfDifficulty(int levelOfDifficulty);
 
-    public void setOverallQuality(int overallQuality) {
-        this.overallQuality = overallQuality;
-    }
+    String getClassName();
 
-    public int getLevelOfDifficulty() {
-        return levelOfDifficulty;
-    }
+    void setClassName(String className);
 
-    public void setLevelOfDifficulty(int levelOfDifficulty) {
-        this.levelOfDifficulty = levelOfDifficulty;
-    }
+    String getForCredit();
 
-    public String getClassName() {
-        return className;
-    }
+    void setForCredit(String forCredit);
 
-    public void setClassName(String className) {
-        this.className = className;
-    }
+    String getAttendance();
 
-    public String getForCredit() {
-        return forCredit;
-    }
+    void setAttendance(String attendance);
 
-    public void setForCredit(String forCredit) {
-        this.forCredit = forCredit;
-    }
+    String getTextBookUsed();
 
-    public String getAttendance() {
-        return attendance;
-    }
+    void setTextBookUsed(String textBookUsed);
 
-    public void setAttendance(String attendance) {
-        this.attendance = attendance;
-    }
+    String getWouldTakeAgain();
 
-    public String getTextBookUsed() {
-        return textBookUsed;
-    }
+    void setWouldTakeAgain(String wouldTakeAgain);
 
-    public void setTextBookUsed(String textBookUsed) {
-        this.textBookUsed = textBookUsed;
-    }
+    String getGradeReceived();
 
-    public String getWouldTakeAgain() {
-        return wouldTakeAgain;
-    }
+    void setGradeReceived(String gradeReceived);
 
-    public void setWouldTakeAgain(String wouldTakeAgain) {
-        this.wouldTakeAgain = wouldTakeAgain;
-    }
+    List<String> getTags();
 
-    public String getGradeReceived() {
-        return gradeReceived;
-    }
+    void setTags(List<String> tags);
 
-    public void setGradeReceived(String gradeReceived) {
-        this.gradeReceived = gradeReceived;
-    }
+    String getRatingText();
 
-    public List<String> getTags() {
-        return tags;
-    }
+    void setRatingText(String ratingText);
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
+    int getFoundHelpful();
 
-    public String getRatingText() {
-        return ratingText;
-    }
+    void setFoundHelpful(int foundHelpful);
 
-    public void setRatingText(String ratingText) {
-        this.ratingText = ratingText;
-    }
+    int getFoundUnhelpful();
 
-    public int getFoundHelpful() {
-        return foundHelpful;
-    }
-
-    public void setFoundHelpful(int foundHelpful) {
-        this.foundHelpful = foundHelpful;
-    }
-
-    public int getFoundUnhelpful() {
-        return foundUnhelpful;
-    }
-
-    public void setFoundUnhelpful(int foundUnhelpful) {
-        this.foundUnhelpful = foundUnhelpful;
-    }
+    void setFoundUnhelpful(int foundUnhelpful);
 }

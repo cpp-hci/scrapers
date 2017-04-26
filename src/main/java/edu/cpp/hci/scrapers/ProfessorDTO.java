@@ -1,5 +1,5 @@
 package edu.cpp.hci.scrapers;
 
-public interface Professor {
+public interface ProfessorDTO {
 
 }

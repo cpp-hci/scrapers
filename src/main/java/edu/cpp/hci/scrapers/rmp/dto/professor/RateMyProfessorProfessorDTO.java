@@ -1,66 +1,28 @@
 package edu.cpp.hci.scrapers.rmp.dto.professor;
 
-import edu.cpp.hci.scrapers.Professor;
+import edu.cpp.hci.scrapers.ProfessorDTO;
 import edu.cpp.hci.scrapers.rmp.dto.rating.RateMyProfessorRatingDTO;
 
 import java.util.List;
 
-public class RateMyProfessorProfessorDTO implements Professor {
-    private int id;
-    private double overallQuality;
-    private double levelOfDifficulty;
-    private double wouldTakeAgain;
-    private List<RateMyProfessorRatingDTO> ratings;
+public interface RateMyProfessorProfessorDTO extends ProfessorDTO {
+    int getId();
 
-    public RateMyProfessorProfessorDTO(int id, double overallQuality, double levelOfDifficulty, double wouldTakeAgain,
-                                       List<RateMyProfessorRatingDTO> ratings) {
-        this.id = id;
-        this.overallQuality = overallQuality;
-        this.levelOfDifficulty = levelOfDifficulty;
-        this.wouldTakeAgain = wouldTakeAgain;
-        this.ratings = ratings;
-    }
+    void setId(int id);
 
-    public RateMyProfessorProfessorDTO() {
-    }
+    double getOverallQuality();
 
-    public int getId() {
-        return id;
-    }
+    void setOverallQuality(double overallQuality);
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    double getLevelOfDifficulty();
 
-    public double getOverallQuality() {
-        return overallQuality;
-    }
+    void setLevelOfDifficulty(double levelOfDifficulty);
 
-    public void setOverallQuality(double overallQuality) {
-        this.overallQuality = overallQuality;
-    }
+    double getWouldTakeAgain();
 
-    public double getLevelOfDifficulty() {
-        return levelOfDifficulty;
-    }
+    void setWouldTakeAgain(double wouldTakeAgain);
 
-    public void setLevelOfDifficulty(double levelOfDifficulty) {
-        this.levelOfDifficulty = levelOfDifficulty;
-    }
+    List<RateMyProfessorRatingDTO> getRatings();
 
-    public double getWouldTakeAgain() {
-        return wouldTakeAgain;
-    }
-
-    public void setWouldTakeAgain(double wouldTakeAgain) {
-        this.wouldTakeAgain = wouldTakeAgain;
-    }
-
-    public List<RateMyProfessorRatingDTO> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<RateMyProfessorRatingDTO> ratings) {
-        this.ratings = ratings;
-    }
+    void setRatings(List<RateMyProfessorRatingDTO> ratings);
 }

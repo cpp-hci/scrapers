@@ -4,9 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cpp.hci.scrapers.WebScraper;
 import edu.cpp.hci.scrapers.constants.School;
 import edu.cpp.hci.scrapers.exceptions.NoResultsException;
+import edu.cpp.hci.scrapers.rmp.dto.professor.RateMyProfessorProfessorBuilder;
 import edu.cpp.hci.scrapers.rmp.dto.professor.RateMyProfessorProfessorDTO;
-import edu.cpp.hci.scrapers.rmp.dto.professor.RateMyProfessorProfessorDTOBuilder;
-import edu.cpp.hci.scrapers.rmp.dto.rating.RateMyProfessorRatingDTOBuilder;
+import edu.cpp.hci.scrapers.rmp.dto.rating.RateMyProfessorRatingBuilder;
 import edu.cpp.hci.scrapers.rmp.exceptions.RateMyProfessorNoResultsException;
 import edu.cpp.hci.scrapers.rmp.json.RateMyProfessorResultRawJsonDTO;
 import org.jsoup.Jsoup;
@@ -60,12 +60,12 @@ public class RateMyProfessorWebScaper extends WebScraper<RateMyProfessorProfesso
     }
 
     private RateMyProfessorProfessorDTO fetchProfessorData(int professorID) throws IOException {
-        RateMyProfessorProfessorDTOBuilder professorBuilder = new RateMyProfessorProfessorDTOBuilder().setId(professorID);
+        RateMyProfessorProfessorBuilder professorBuilder = new RateMyProfessorProfessorBuilder().setId(professorID);
         int remaining, page = 1;
         do {
             RateMyProfessorResultRawJsonDTO result = fetchRawProfessorData(professorID, page);
             result.getRatings().stream()
-                    .map(RateMyProfessorRatingDTOBuilder::copyFromRawJson)
+                    .map(RateMyProfessorRatingBuilder::copyFromRawJson)
                     .forEach(professorBuilder::withReview);
             remaining = result.getRemaining();
             page++;
