@@ -6,12 +6,11 @@ public enum School {
 
     private final String school;
 
-    School(final String school) {
+    private School(String school) {
         this.school = school;
     }
 
-    @Override
     public String toString() {
-        return school;
+        return this.school;
     }
 }

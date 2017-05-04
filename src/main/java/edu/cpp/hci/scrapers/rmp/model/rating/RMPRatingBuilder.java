@@ -1,11 +1,11 @@
-package edu.cpp.hci.scrapers.rmp.dto.rating;
+package edu.cpp.hci.scrapers.rmp.model.rating;
 
-import edu.cpp.hci.scrapers.rmp.dto.rating.impl.RateMyProfessorRating;
+import edu.cpp.hci.scrapers.rmp.model.rating.impl.RMPRating;
 import edu.cpp.hci.scrapers.rmp.json.RateMyProfessorRatingRawJsonDTO;
 
 import java.util.List;
 
-public class RateMyProfessorRatingBuilder {
+public class RMPRatingBuilder {
     private int id;
     private String date;
     private String description;
@@ -22,8 +22,8 @@ public class RateMyProfessorRatingBuilder {
     private int foundHelpful;
     private int foundUnhelpful;
 
-    public static RateMyProfessorRatingDTO copyFromRawJson(RateMyProfessorRatingRawJsonDTO copy) {
-        RateMyProfessorRatingBuilder builder = new RateMyProfessorRatingBuilder();
+    public static RMPRatingDTO copyFromRawJson(RateMyProfessorRatingRawJsonDTO copy) {
+        RMPRatingBuilder builder = new RMPRatingBuilder();
         builder.setAttendance(copy.getAttendance());
         builder.setId(copy.getId());
         builder.setClassName(copy.getrClass());
@@ -44,83 +44,83 @@ public class RateMyProfessorRatingBuilder {
         return builder.createRateMyProfessorReviewDTO();
     }
 
-    public RateMyProfessorRatingBuilder setId(int id) {
+    public RMPRatingBuilder setId(int id) {
         this.id = id;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setDate(String date) {
+    public RMPRatingBuilder setDate(String date) {
         this.date = date;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setDescription(String description) {
+    public RMPRatingBuilder setDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setOverallQuality(int overallQuality) {
+    public RMPRatingBuilder setOverallQuality(int overallQuality) {
         this.overallQuality = overallQuality;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setLevelOfDifficulty(int levelOfDifficulty) {
+    public RMPRatingBuilder setLevelOfDifficulty(int levelOfDifficulty) {
         this.levelOfDifficulty = levelOfDifficulty;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setClassName(String className) {
+    public RMPRatingBuilder setClassName(String className) {
         this.className = className;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setForCredit(String forCredit) {
+    public RMPRatingBuilder setForCredit(String forCredit) {
         this.forCredit = forCredit;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setAttendance(String attendance) {
+    public RMPRatingBuilder setAttendance(String attendance) {
         this.attendance = attendance;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setTextBookUsed(String textBookUsed) {
+    public RMPRatingBuilder setTextBookUsed(String textBookUsed) {
         this.textBookUsed = textBookUsed;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setWouldTakeAgain(String wouldTakeAgain) {
+    public RMPRatingBuilder setWouldTakeAgain(String wouldTakeAgain) {
         this.wouldTakeAgain = wouldTakeAgain;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setGradeReceived(String gradeReceived) {
+    public RMPRatingBuilder setGradeReceived(String gradeReceived) {
         this.gradeReceived = gradeReceived;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setTags(List<String> tags) {
+    public RMPRatingBuilder setTags(List<String> tags) {
         this.tags = tags;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setRatingText(String ratingText) {
+    public RMPRatingBuilder setRatingText(String ratingText) {
         this.ratingText = ratingText;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setFoundHelpful(int foundHelpful) {
+    public RMPRatingBuilder setFoundHelpful(int foundHelpful) {
         this.foundHelpful = foundHelpful;
         return this;
     }
 
-    public RateMyProfessorRatingBuilder setFoundUnhelpful(int foundUnhelpful) {
+    public RMPRatingBuilder setFoundUnhelpful(int foundUnhelpful) {
         this.foundUnhelpful = foundUnhelpful;
         return this;
     }
 
-    public RateMyProfessorRatingDTO createRateMyProfessorReviewDTO() {
-        return new RateMyProfessorRating(id, date, description, overallQuality, levelOfDifficulty, className,
+    public RMPRatingDTO createRateMyProfessorReviewDTO() {
+        return new RMPRating(id, date, description, overallQuality, levelOfDifficulty, className,
                 forCredit, attendance, textBookUsed, wouldTakeAgain, gradeReceived, tags, ratingText, foundHelpful,
                 foundUnhelpful);
     }

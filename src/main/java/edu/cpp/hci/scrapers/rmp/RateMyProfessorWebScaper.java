@@ -4,9 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cpp.hci.scrapers.WebScraper;
 import edu.cpp.hci.scrapers.constants.School;
 import edu.cpp.hci.scrapers.exceptions.NoResultsException;
-import edu.cpp.hci.scrapers.rmp.dto.professor.RateMyProfessorProfessorBuilder;
-import edu.cpp.hci.scrapers.rmp.dto.professor.RateMyProfessorProfessorDTO;
-import edu.cpp.hci.scrapers.rmp.dto.rating.RateMyProfessorRatingBuilder;
+import edu.cpp.hci.scrapers.rmp.model.professor.RMPProfessorBuilder;
+import edu.cpp.hci.scrapers.rmp.model.professor.RMPProfessorDTO;
+import edu.cpp.hci.scrapers.rmp.model.rating.RMPRatingBuilder;
 import edu.cpp.hci.scrapers.rmp.exceptions.RateMyProfessorNoResultsException;
 import edu.cpp.hci.scrapers.rmp.json.RateMyProfessorResultRawJsonDTO;
 import org.jsoup.Jsoup;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RateMyProfessorWebScaper extends WebScraper<RateMyProfessorProfessorDTO> {
+public class RateMyProfessorWebScaper extends WebScraper<RMPProfessorDTO> {
     private final static String HOSTNAME = "https://www.ratemyprofessors.com";
     private final static String QUERY_URL = "/search.jsp?query=";
     private final static String SHOW_RATINGS_URL = "/ShowRatings.jsp?tid=";
@@ -49,23 +49,26 @@ public class RateMyProfessorWebScaper extends WebScraper<RateMyProfessorProfesso
     }
 
     @Override
-    public List<RateMyProfessorProfessorDTO> fetch()
+    public List<RMPProfessorDTO> fetch()
             throws NoResultsException, IOException {
         List<Integer> professorIDs = fetchProfessorID();
-        List<RateMyProfessorProfessorDTO> profs = new ArrayList<>();
+        List<RMPProfessorDTO> profs = new ArrayList<>();
         for (Integer professorID : professorIDs) {
             profs.add(fetchProfessorData(professorID));
+
         }
         return profs;
     }
 
-    private RateMyProfessorProfessorDTO fetchProfessorData(int professorID) throws IOException {
-        RateMyProfessorProfessorBuilder professorBuilder = new RateMyProfessorProfessorBuilder().setId(professorID);
+    private RMPProfessorDTO fetchProfessorData(int professorID) throws IOException {
+        RMPProfessorBuilder professorBuilder = new RMPProfessorBuilder().setId(professorID);
+        professorBuilder.setName(getProfessor());
+        professorBuilder.setSchool(getSchool());
         int remaining, page = 1;
         do {
             RateMyProfessorResultRawJsonDTO result = fetchRawProfessorData(professorID, page);
             result.getRatings().stream()
-                    .map(RateMyProfessorRatingBuilder::copyFromRawJson)
+                    .map(RMPRatingBuilder::copyFromRawJson)
                     .forEach(professorBuilder::withReview);
             remaining = result.getRemaining();
             page++;

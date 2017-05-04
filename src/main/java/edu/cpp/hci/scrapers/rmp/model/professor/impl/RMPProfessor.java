@@ -1,27 +1,31 @@
-package edu.cpp.hci.scrapers.rmp.dto.professor.impl;
+package edu.cpp.hci.scrapers.rmp.model.professor.impl;
 
-import edu.cpp.hci.scrapers.rmp.dto.professor.RateMyProfessorProfessorDTO;
-import edu.cpp.hci.scrapers.rmp.dto.rating.RateMyProfessorRatingDTO;
+import edu.cpp.hci.scrapers.rmp.model.professor.RMPProfessorDTO;
+import edu.cpp.hci.scrapers.rmp.model.rating.RMPRatingDTO;
 
 import java.util.List;
 
-public class RateMyProfessorProfessor implements RateMyProfessorProfessorDTO {
+public class RMPProfessor implements RMPProfessorDTO {
     private int id;
     private double overallQuality;
     private double levelOfDifficulty;
     private double wouldTakeAgain;
-    private List<RateMyProfessorRatingDTO> ratings;
+    private List<RMPRatingDTO> ratings;
+    private String name;
+    private String school;
 
-    public RateMyProfessorProfessor(int id, double overallQuality, double levelOfDifficulty, double wouldTakeAgain,
-                                    List<RateMyProfessorRatingDTO> ratings) {
+    public RMPProfessor(int id, String name, String school, double overallQuality, double levelOfDifficulty, double wouldTakeAgain,
+                        List<RMPRatingDTO> ratings) {
         this.id = id;
         this.overallQuality = overallQuality;
         this.levelOfDifficulty = levelOfDifficulty;
         this.wouldTakeAgain = wouldTakeAgain;
         this.ratings = ratings;
+        this.name = name;
+        this.school = school;
     }
 
-    public RateMyProfessorProfessor() {
+    public RMPProfessor() {
     }
 
     @Override
@@ -65,12 +69,32 @@ public class RateMyProfessorProfessor implements RateMyProfessorProfessorDTO {
     }
 
     @Override
-    public List<RateMyProfessorRatingDTO> getRatings() {
+    public List<RMPRatingDTO> getRatings() {
         return ratings;
     }
 
     @Override
-    public void setRatings(List<RateMyProfessorRatingDTO> ratings) {
+    public void setRatings(List<RMPRatingDTO> ratings) {
         this.ratings = ratings;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getSchool() {
+        return school;
+    }
+
+    @Override
+    public void setSchool(String school) {
+        this.school = school;
     }
 }

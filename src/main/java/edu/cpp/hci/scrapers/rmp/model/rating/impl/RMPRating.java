@@ -1,10 +1,10 @@
-package edu.cpp.hci.scrapers.rmp.dto.rating.impl;
+package edu.cpp.hci.scrapers.rmp.model.rating.impl;
 
-import edu.cpp.hci.scrapers.rmp.dto.rating.RateMyProfessorRatingDTO;
+import edu.cpp.hci.scrapers.rmp.model.rating.RMPRatingDTO;
 
 import java.util.List;
 
-public class RateMyProfessorRating implements RateMyProfessorRatingDTO {
+public class RMPRating implements RMPRatingDTO {
     private int id;
     private String date;
     private String description;
@@ -21,10 +21,10 @@ public class RateMyProfessorRating implements RateMyProfessorRatingDTO {
     private int foundHelpful;
     private int foundUnhelpful;
 
-    public RateMyProfessorRating(int id, String date, String description, int overallQuality,
-                                 int levelOfDifficulty, String className, String forCredit, String attendance,
-                                 String textBookUsed, String wouldTakeAgain, String gradeReceived, List<String> tags,
-                                 String ratingText, int foundHelpful, int foundUnhelpful) {
+    public RMPRating(int id, String date, String description, int overallQuality,
+                     int levelOfDifficulty, String className, String forCredit, String attendance,
+                     String textBookUsed, String wouldTakeAgain, String gradeReceived, List<String> tags,
+                     String ratingText, int foundHelpful, int foundUnhelpful) {
         this.id = id;
         this.date = date;
         this.description = description;
@@ -42,7 +42,7 @@ public class RateMyProfessorRating implements RateMyProfessorRatingDTO {
         this.foundUnhelpful = foundUnhelpful;
     }
 
-    public RateMyProfessorRating() {
+    public RMPRating() {
     }
 
     @Override

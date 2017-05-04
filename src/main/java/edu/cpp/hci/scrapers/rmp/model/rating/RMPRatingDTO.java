@@ -1,8 +1,8 @@
-package edu.cpp.hci.scrapers.rmp.dto.rating;
+package edu.cpp.hci.scrapers.rmp.model.rating;
 
 import java.util.List;
 
-public interface RateMyProfessorRatingDTO {
+public interface RMPRatingDTO {
     int getId();
 
     void setId(int id);
