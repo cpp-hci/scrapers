@@ -7,4 +7,8 @@ public interface KoofersRatingDTO {
     String getCourseNumber();
     void setPeriod(String period);
     String getPeriod();
+    void setOverallRating(double overallRating);
+    double getOverallRating();
+    void setOverallGPA(String overallGPA);
+    String getOverallGPA();
 }
