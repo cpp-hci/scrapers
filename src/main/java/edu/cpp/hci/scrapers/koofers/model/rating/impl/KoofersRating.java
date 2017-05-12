@@ -5,6 +5,18 @@ import edu.cpp.hci.scrapers.koofers.model.rating.KoofersRatingDTO;
 public class KoofersRating implements KoofersRatingDTO {
     private String courseNumber;
     private String courseName;
+    private String period;
+
+    @Override
+    public String getPeriod() {
+        return period;
+    }
+
+    @Override
+    public void setPeriod(String period) {
+        this.period = period;
+    }
+
 
     @Override
     public void setCourseName(String name) {
@@ -18,11 +30,11 @@ public class KoofersRating implements KoofersRatingDTO {
 
     @Override
     public void setCourseNumber(String number) {
-
+    this.courseNumber=number;
     }
 
     @Override
     public String getCourseNumber() {
-        return null;
+        return courseNumber;
     }
 }

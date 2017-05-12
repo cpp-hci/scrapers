@@ -27,6 +27,16 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
         Document doc = Jsoup.connect("https://www.koofers.com/california-state-polytechnic-university-pomona-csupomona/instructors/young-145216/").get();
         Elements name = doc.select("div[id*=full_name]");
         young.setName(name.get(0).text());
+        Elements school = doc.select("div[id*=job_summary]");
+        young.setSchool(school.get(0).text());
+        Elements overallRate = doc.select("div[id*=header_box_rating]");
+        Element subd = overallRate.get(0);
+        Elements select = subd.select("div.k_hzsep");
+        System.out.println(subd.text());
+             int size = select.get(0).select("div").size();
+        System.out.println(size);
+     //  young.setOverallRating(Double.parseDouble(select.get(0).select("div").get(0).text())); //you're selecting the div, but the text inside the span which is inside the div
+        //young.setOverallRating(Double.parseDouble(overallRate.get(0).text()));
         results.add(young);
         return results;
     }
@@ -36,6 +46,7 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
             List<KoofersProfessorDTO> fetch = new KoofersWebScraper("", School.CAL_POLY_POMONA).fetch();
             for (KoofersProfessorDTO koofersProfessorDTO : fetch) {
                 System.out.println(koofersProfessorDTO.getName());
+                System.out.println(koofersProfessorDTO.getSchool());
             }
 
         } catch (NoResultsException | IOException e) {
@@ -60,7 +71,9 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
             select = singleReview.select("div.course_name");
             String courseName = select.get(0).text();
             System.out.println(courseName);
+
         }
         System.out.println(reviews.size());
     }
+
 }

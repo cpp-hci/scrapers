@@ -5,4 +5,6 @@ public interface KoofersRatingDTO {
     String getCourseName();
     void setCourseNumber(String number);
     String getCourseNumber();
+    void setPeriod(String period);
+    String getPeriod();
 }

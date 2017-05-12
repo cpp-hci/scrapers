@@ -6,7 +6,11 @@ import edu.cpp.hci.scrapers.koofers.model.rating.KoofersRatingDTO;
 import java.util.List;
 
 public class KoofersProfessor implements KoofersProfessorDTO {
+
     private String name;
+    private String period ;
+    private String school;
+    private double overallRating;
 
     @Override
     public String getName() {
@@ -18,24 +22,33 @@ public class KoofersProfessor implements KoofersProfessorDTO {
         this.name = name;
     }
 
+    public String getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
+    }
+
     @Override
     public String getSchool() {
-        return null;
+        return school;
     }
 
     @Override
     public void setSchool(String school) {
+        this.school =school;
 
     }
 
     @Override
     public double getOverallRating() {
-        return 0;
+        return overallRating;
     }
 
     @Override
     public void setOverallRating(double overallRating) {
-
+    this.overallRating = overallRating;
     }
 
     @Override
