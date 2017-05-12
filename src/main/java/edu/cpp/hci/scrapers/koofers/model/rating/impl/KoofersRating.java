@@ -7,7 +7,7 @@ public class KoofersRating implements KoofersRatingDTO {
     private String courseName;
     private String period;
     private double overallRating;
-    private String overallGPA;
+    private double overallGPA;
 
     @Override
     public String getPeriod() {
@@ -49,10 +49,10 @@ public class KoofersRating implements KoofersRatingDTO {
     }
 
     @Override
-    public String getOverallGPA() { return overallGPA; }
+    public double getOverallGPA() { return overallGPA; }
 
     @Override
-    public void setOverallGPA(String overallGPA) {
+    public void setOverallGPA(double overallGPA) {
         this.overallGPA = overallGPA;
     }
 }

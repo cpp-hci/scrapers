@@ -33,9 +33,14 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
         Element subd = overallRate.get(0);
         Elements select = subd.select("div.k_hzsep");
         professor.setOverallRating(Double.parseDouble(subd.text().substring(2,5)));
-        Elements overallGPA =doc.select("div[id*=header_box_gpa]");
-        professor.setOverallGPA(overallGPA.get(0).text());
-        System.out.println("GPA"+overallGPA.get(0).text()); // test to check double value
+       // Elements overallGPA =doc.select("div[id*=header_box_gpa]");
+        //professor.setOverallGPA(overallGPA.get(0).text());
+                //---
+        Elements overallGPA =doc.select("div[id*=avg_gpa]");
+        professor.setOverallGPA(Double.parseDouble(overallGPA.get(0).text()));
+        //---
+        System.out.println("gpa::"+overallGPA.get(0).text()); // test to check double value
+        //--
         results.add(professor);
        return results;
     }

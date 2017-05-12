@@ -11,7 +11,7 @@ public class KoofersProfessor implements KoofersProfessorDTO {
     private String period ;
     private String school;
     private double overallRating;
-    private String overallGPA;
+    private double overallGPA;
 
     @Override
     public String getName() {
@@ -62,11 +62,12 @@ public class KoofersProfessor implements KoofersProfessorDTO {
         return null;
     }
 
-    public String getOverallGPA() {
+    public double getOverallGPA() {
         return overallGPA;
     }
 
-    public void setOverallGPA(String overallGPA) {
+    public void setOverallGPA(double overallGPA) {
         this.overallGPA = overallGPA;
     }
+
 }

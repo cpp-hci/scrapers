@@ -9,6 +9,6 @@ public interface KoofersRatingDTO {
     String getPeriod();
     void setOverallRating(double overallRating);
     double getOverallRating();
-    void setOverallGPA(String overallGPA);
-    String getOverallGPA();
+    void setOverallGPA(double overallGPA);
+    double getOverallGPA();
 }

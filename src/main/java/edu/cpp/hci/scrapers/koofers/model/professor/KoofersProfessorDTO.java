@@ -11,8 +11,9 @@ public interface KoofersProfessorDTO {
     void setSchool(String school);
     double getOverallRating();
     void setOverallRating(double overallRating);
-    void setOverallGPA(String overallGPA);
-    String getOverallGPA();
+    void setOverallGPA(double overallGPA);
+    double getOverallGPA();
+
     void setRatings(List<KoofersRatingDTO> ratings);
     List<KoofersRatingDTO> getRatings();
 
