@@ -10,6 +10,7 @@ public class KoofersProfessor implements KoofersProfessorDTO {
     private String name;
     private String period ;
     private String school;
+    private String department;
     private double overallRating;
     private double overallGPA;
 
@@ -40,6 +41,14 @@ public class KoofersProfessor implements KoofersProfessorDTO {
     public void setSchool(String school) {
         this.school =school;
 
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     @Override

@@ -8,6 +8,10 @@ public interface KoofersProfessorDTO {
     String getName();
     void setName(String name);
     String getSchool();
+    void setPeriod(String period);
+    String getPeriod();
+    void setDepartment(String department);
+    String getDepartment();
     void setSchool(String school);
     double getOverallRating();
     void setOverallRating(double overallRating);
