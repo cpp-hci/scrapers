@@ -1,6 +1,7 @@
 package edu.cpp.hci.scrapers.koofers.model.professor;
 
 import edu.cpp.hci.scrapers.koofers.model.rating.KoofersRatingDTO;
+import edu.cpp.hci.scrapers.koofers.model.rating.impl.KoofersRating;
 
 import java.util.List;
 
@@ -17,9 +18,6 @@ public interface KoofersProfessorDTO {
     void setOverallRating(double overallRating);
     void setOverallGPA(double overallGPA);
     double getOverallGPA();
-
-    void setRatings(List<KoofersRatingDTO> ratings);
-    List<KoofersRatingDTO> getRatings();
-
-
+    void setRatings(List<KoofersRating> ratings);
+    List<KoofersRating> getRatings();
 }

@@ -2,12 +2,15 @@ package edu.cpp.hci.scrapers.koofers.model.rating.impl;
 
 import edu.cpp.hci.scrapers.koofers.model.rating.KoofersRatingDTO;
 
+import java.util.List;
+
 public class KoofersRating implements KoofersRatingDTO {
     private String courseNumber;
     private String courseName;
     private String period;
     private double overallRating;
     private double overallGPA;
+
 
     @Override
     public String getPeriod() {
