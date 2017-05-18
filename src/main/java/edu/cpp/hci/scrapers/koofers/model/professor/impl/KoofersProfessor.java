@@ -16,7 +16,7 @@ public class KoofersProfessor implements KoofersProfessorDTO {
     private String department;
     private double overallRating;
     private double overallGPA;
-   // private List ratings;
+    private List<KoofersRating> ratings;
     @Override
     public String getName() {
         return name;
@@ -65,11 +65,13 @@ public class KoofersProfessor implements KoofersProfessorDTO {
     }
 
     @Override
-  public void setRatings(List<KoofersRating> ratings)   {    }
+  public void setRatings(List<KoofersRating> ratings)   {
+        this.ratings=ratings;
+    }
 
 
     //@Override
-   public List<KoofersRating> getRatings() {         return null;     }
+   public List<KoofersRating> getRatings() {         return ratings;     }
 
     public double getOverallGPA() {
         return overallGPA;

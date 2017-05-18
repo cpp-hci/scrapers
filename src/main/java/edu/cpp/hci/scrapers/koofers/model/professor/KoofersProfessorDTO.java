@@ -18,6 +18,6 @@ public interface KoofersProfessorDTO {
     void setOverallRating(double overallRating);
     void setOverallGPA(double overallGPA);
     double getOverallGPA();
-    void setRatings(List<KoofersRating> ratings);
     List<KoofersRating> getRatings();
+    void setRatings(List<KoofersRating> ratings);
 }
