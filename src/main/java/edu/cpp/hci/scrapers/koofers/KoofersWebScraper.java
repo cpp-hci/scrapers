@@ -30,23 +30,21 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
 
     @Override
     public List<KoofersProfessorDTO> fetch() throws NoResultsException, IOException, NoProfessorException {
-        Document doc = Jsoup.connect(getProfessorURL()).get();
+        String professorURL = getProfessorURL();
+        System.out.println(professorURL);
+        Document doc = Jsoup.connect(professorURL).get();
         KoofersProfessor professor = new KoofersProfessor();
         List<KoofersProfessorDTO> results = new ArrayList<>();
-        Elements name = doc.select("div[id*=full_name]");
-        professor.setName(name.get(0).text());
-        Elements school = doc.select("div[id*=job_summary]");
-        String proinfo[]= school.get(0).text().split("\\)");
-        professor.setPeriod(proinfo[0]+")");
-        professor.setSchool(proinfo[1]+")");
-        professor.setDepartment(proinfo[2]);
+        professor.setName(getProfessor());
+        professor.setSchool(getSchool());
         Elements overallRate = doc.select("div[id*=header_box_rating]");
         Element subd = overallRate.get(0);
-        Elements select = subd.select("div.k_hzsep");
         professor.setOverallRating(Double.parseDouble(subd.text().substring(2,5)));
         Elements overallGPA =doc.select("div[id*=avg_gpa]");
-        professor.setOverallGPA(Double.parseDouble(overallGPA.get(0).text()));
-        professor.setRatings(getRatings());
+        if(overallGPA.size() > 0){
+            professor.setOverallGPA(Double.parseDouble(overallGPA.get(0).text()));
+        }
+        professor.setRatings(getRatings(professorURL));
         results.add(professor);
         return results;
     }
@@ -106,25 +104,10 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
         return url.substring(KOOFERS_BASE_URL.length() - 1, url.lastIndexOf('/'));
     }
 
-    public static void test() throws IOException {
-        String resultLink ="Link";
-        Document GSearch =Jsoup.connect("https://www.google.com/search?q=craig+rich+cal+poly+pomona+site%3Akoofers.com&oq=craig+rich+cal+poly+pomona+site%3Akoofers.com").userAgent("Mozilla").get();
-        Elements search=GSearch.select("div[id*=center_col]");
-        Element subsearch =search.get(0);
-     //   Elements Ssubsearch = subsearch.getElementsByAttributeValue("class","g");
-
-        Elements link=subsearch.select("div.g");
-
-        resultLink=link.text();
-        System.out.println(resultLink);
-
-    }
-
-    public static List<KoofersRating> getRatings() throws IOException {
+    public List<KoofersRating> getRatings(String professorURL) throws IOException {
         Document doc;
         List<KoofersRating> reviewList = new ArrayList<KoofersRating>();
-        // need http protocol
-        doc = Jsoup.connect("https://www.koofers.com/california-state-polytechnic-university-pomona-csupomona/instructors/young-145216/").get();
+        doc = Jsoup.connect(professorURL).get();
         Elements reviews = doc.select("div.user_rating_box");
         for (int i = 0; i < reviews.size(); i++) {
             KoofersRating krb = new KoofersRating();
@@ -143,7 +126,11 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
 
             Elements select = singleReview.select("div.right");
             String reviewText = select.get(0).select("div").get(0).text();
-            krb.setReviewText(reviewText);
+            int index = reviewText.lastIndexOf(" Professor rated by");
+            if(index == -1){
+                System.out.println(reviewText);
+            }
+            krb.setReviewText(reviewText.substring(0,index));
 
 
             Elements date = singleReview.select("div.right");
@@ -152,13 +139,7 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
             String uReviewDate =rDate[1];
 //            krb.set(uReviewDate);
             reviewList.add(krb);
-           /* System.out.println(krb.getClassNum());
-            System.out.println(krb.getClassName());
-            System.out.println(krb.getClassRating());
-            System.out.println(krb.getRatingText());
-            System.out.println(krb.getDate()); */
         }
-        System.out.println(reviewList);
         return reviewList;
     }
 
