@@ -1,3 +1,5 @@
+
+//craig rich cal poly pomona site:koofers.com
 package edu.cpp.hci.scrapers.koofers;
 
 import edu.cpp.hci.scrapers.WebScraper;
@@ -22,9 +24,7 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
         @Override
     public List<KoofersProfessorDTO> fetch() throws NoResultsException, IOException {
         List<KoofersProfessorDTO> results = new ArrayList<>();
-
         KoofersProfessor professor = new KoofersProfessor();
-      //  Document doc = Jsoup.connect("https://www.koofers.com/california-state-polytechnic-university-pomona-csupomona/instructors/young-145216/").get();
         Document doc = Jsoup.connect("https://www.koofers.com/california-state-polytechnic-university-pomona-csupomona/instructors/young-145216/").get();
         Elements name = doc.select("div[id*=full_name]");
         professor.setName(name.get(0).text());
@@ -40,8 +40,6 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
         Elements overallGPA =doc.select("div[id*=avg_gpa]");
         professor.setOverallGPA(Double.parseDouble(overallGPA.get(0).text()));
         professor.setRatings(getRatings());
-          //---
-
         results.add(professor);
        return results;
     }
@@ -49,7 +47,7 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
     public static void main(String[] args) {
         try {
             String json = new KoofersWebScraper("", School.CAL_POLY_POMONA).getJson();
-            System.out.println(json);
+          // System.out.println(json);
 //            for (KoofersProfessorDTO koofersProfessorDTO : fetch) {
 //                System.out.println(koofersProfessorDTO.getName());
 //                System.out.println(koofersProfessorDTO.getSchool());
@@ -59,8 +57,8 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
 //                System.out.println(koofersProfessorDTO.getOverallGPA());
 //            }
             KoofersWebScraper scraper = new KoofersWebScraper("", School.CAL_POLY_POMONA);
-            System.out.println(scraper.getJson());
-
+           // System.out.println(scraper.getJson());
+test();
         } catch (NoResultsException | IOException e) {
             e.printStackTrace();
         }
@@ -68,16 +66,32 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
     }
 
     // TODO: 5/17/2017 don't make it static
-    public static String getURL(String professorName, School school){
+    public static String getURL(String professorName, School school)throws IOException{
+        String resultLink;
+        Document GSearch =Jsoup.connect("https://www.google.com/search?q=craig+rich+cal+poly+pomona+site%3Akoofers.com").userAgent("Mozilla").get();
+        Elements search=GSearch.select("div[id*=center_col]");
+       // resultLink =search.text();
+        Element subsearch =search.select("div[id*=rso]").get(0);
+        resultLink =subsearch.text();
+       Elements link = subsearch.getElementsByAttributeValue("class","r");
+       // Elements link=subsearch.select("div.href");
+       //  resultLink=link.text();
+        //System.out.println("link");
+
+
+
         return "https://www.koofers.com/california-state-polytechnic-university-pomona-csupomona/instructors/young-145216/";
     }
 
     public static void test() throws IOException {
-//        Document GSearch =Jsoup.connect("https://www.google.com/search?q=craig+rich+cal+poly+pomona+site%3Akoofers.com").userAgent("Mozilla").get();
-//        Elements search=GSearch.select("div[*id=center_col]");
-//        Element subsearch =search.get(0);
-//        Elements link=subsearch.select("div.href");
-//        String resultLink=link.text();
+        String resultLink ="Link";
+        Document GSearch =Jsoup.connect("https://www.google.com/search?q=craig+rich+cal+poly+pomona+site%3Akoofers.com&oq=craig+rich+cal+poly+pomona+site%3Akoofers.com").userAgent("Mozilla").get();
+        Elements search=GSearch.select("div[id*=center_col]");
+        Element subsearch =search.get(0);
+     Elements Ssubsearch = subsearch.getElementsByAttributeValue("href","koofers");
+       // Elements link=subsearch.select("div.g");
+        resultLink=link.text();
+        System.out.println(resultLink);
 
     }
 
