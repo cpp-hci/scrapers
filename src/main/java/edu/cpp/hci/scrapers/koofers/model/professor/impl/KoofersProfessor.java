@@ -2,12 +2,21 @@ package edu.cpp.hci.scrapers.koofers.model.professor.impl;
 
 import edu.cpp.hci.scrapers.koofers.model.professor.KoofersProfessorDTO;
 import edu.cpp.hci.scrapers.koofers.model.rating.KoofersRatingDTO;
+import edu.cpp.hci.scrapers.koofers.model.rating.impl.KoofersRating;
+import edu.cpp.hci.scrapers.koofers.model.rating.impl.KoofersRatingBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class KoofersProfessor implements KoofersProfessorDTO {
-    private String name;
 
+    private String name;
+    private String period ;
+    private String school;
+    private String department;
+    private double overallRating;
+    private double overallGPA;
+    private List<KoofersRating> ratings;
     @Override
     public String getName() {
         return name;
@@ -18,33 +27,59 @@ public class KoofersProfessor implements KoofersProfessorDTO {
         this.name = name;
     }
 
+    public String getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
+    }
+
     @Override
     public String getSchool() {
-        return null;
+        return school;
     }
 
     @Override
     public void setSchool(String school) {
+        this.school =school;
 
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     @Override
     public double getOverallRating() {
-        return 0;
+        return overallRating;
     }
 
     @Override
     public void setOverallRating(double overallRating) {
-
+    this.overallRating = overallRating;
     }
 
     @Override
-    public void setRatings(List<KoofersRatingDTO> ratings) {
-
+  public void setRatings(List<KoofersRating> ratings)   {
+        this.ratings=ratings;
     }
 
-    @Override
-    public List<KoofersRatingDTO> getRatings() {
-        return null;
+
+    //@Override
+   public List<KoofersRating> getRatings() {         return ratings;     }
+
+    public double getOverallGPA() {
+        return overallGPA;
     }
+
+    public void setOverallGPA(double overallGPA) {
+        this.overallGPA = overallGPA;
+    }
+
+
 }
