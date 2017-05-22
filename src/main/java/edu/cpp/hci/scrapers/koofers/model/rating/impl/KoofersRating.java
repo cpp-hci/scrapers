@@ -2,8 +2,6 @@ package edu.cpp.hci.scrapers.koofers.model.rating.impl;
 
 import edu.cpp.hci.scrapers.koofers.model.rating.KoofersRatingDTO;
 
-import java.util.List;
-
 public class KoofersRating implements KoofersRatingDTO {
     private String courseNumber;
     private String courseName;
@@ -23,6 +21,10 @@ public class KoofersRating implements KoofersRatingDTO {
         this.period = period;
     }
 
+    @Override
+    public String getCourseName() {
+        return courseName;
+    }
 
     @Override
     public void setCourseName(String name) {
@@ -30,18 +32,13 @@ public class KoofersRating implements KoofersRatingDTO {
     }
 
     @Override
-    public String getCourseName() {
-        return courseName;
+    public String getCourseNumber() {
+        return courseNumber;
     }
 
     @Override
     public void setCourseNumber(String number) {
-    this.courseNumber=number;
-    }
-
-    @Override
-    public String getCourseNumber() {
-        return courseNumber;
+        this.courseNumber = number;
     }
 
     public double getOverallRating() {
@@ -53,7 +50,9 @@ public class KoofersRating implements KoofersRatingDTO {
     }
 
     @Override
-    public double getOverallGPA() { return overallGPA; }
+    public double getOverallGPA() {
+        return overallGPA;
+    }
 
     @Override
     public void setOverallGPA(double overallGPA) {

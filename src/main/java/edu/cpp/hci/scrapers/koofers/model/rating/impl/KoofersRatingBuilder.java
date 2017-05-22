@@ -1,12 +1,5 @@
 package edu.cpp.hci.scrapers.koofers.model.rating.impl;
 
-import edu.cpp.hci.scrapers.rmp.json.RateMyProfessorRatingRawJsonDTO;
-import edu.cpp.hci.scrapers.rmp.model.rating.RMPRatingDTO;
-import edu.cpp.hci.scrapers.rmp.model.rating.impl.RMPRating;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class KoofersRatingBuilder {
 
     private String date;
@@ -14,7 +7,9 @@ public class KoofersRatingBuilder {
     private String className;
     private double classRating;
     private String ratingText;
-    public KoofersRatingBuilder(){}
+
+    public KoofersRatingBuilder() {
+    }
 
     public KoofersRatingBuilder(String date, String classNum, String className, double classRating, String ratingText) {
         this.date = date;

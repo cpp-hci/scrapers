@@ -39,9 +39,9 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
         professor.setSchool(getSchool());
         Elements overallRate = doc.select("div[id*=header_box_rating]");
         Element subd = overallRate.get(0);
-        professor.setOverallRating(Double.parseDouble(subd.text().substring(2,5)));
-        Elements overallGPA =doc.select("div[id*=avg_gpa]");
-        if(overallGPA.size() > 0){
+        professor.setOverallRating(Double.parseDouble(subd.text().substring(2, 5)));
+        Elements overallGPA = doc.select("div[id*=avg_gpa]");
+        if (overallGPA.size() > 0) {
             professor.setOverallGPA(Double.parseDouble(overallGPA.get(0).text()));
         }
         professor.setRatings(getRatings(professorURL));
@@ -55,15 +55,15 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
         Elements select = doc.select("li.b_algo");
         Element element = select.get(0).select("h2").get(0).select("a").get(0);
         String url = element.attr("href");
-        if(url.charAt(4) != 's'){
-            url = url.substring(0,4) + 's' + url.substring(4);
+        if (url.charAt(4) != 's') {
+            url = url.substring(0, 4) + 's' + url.substring(4);
         }
         String name = element.select("strong").get(0).text().toLowerCase();
-        if(!url.contains(KOOFERS_BASE_URL) || !url.contains(getSchoolURL())){
+        if (!url.contains(KOOFERS_BASE_URL) || !url.contains(getSchoolURL())) {
             throw new KoofersNoProfessorException();
         }
-        for(String subName: getProfessor().toLowerCase().split(" ")){
-            if(!name.contains(subName)){
+        for (String subName : getProfessor().toLowerCase().split(" ")) {
+            if (!name.contains(subName)) {
                 throw new KoofersNoProfessorException();
             }
         }
@@ -86,7 +86,7 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
             KoofersRating krb = new KoofersRating();
             Element singleReview = reviews.get(i);
             Elements courseNum = singleReview.select("div.course_num");
-            String cnumber= courseNum.text();
+            String cnumber = courseNum.text();
             krb.setCourseNumber(cnumber);
 
             Elements coursenam = singleReview.select("div.course_name");
@@ -100,10 +100,10 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
             Elements select = singleReview.select("div.right");
             String reviewText = select.get(0).select("div").get(0).text();
             int index = reviewText.lastIndexOf(" Professor rated by");
-            if(index == -1){
+            if (index == -1) {
                 System.out.println(reviewText);
             }
-            krb.setReviewText(reviewText.substring(0,index));
+            krb.setReviewText(reviewText.substring(0, index));
 
             reviewList.add(krb);
         }

@@ -1,22 +1,20 @@
 package edu.cpp.hci.scrapers.koofers.model.professor.impl;
 
 import edu.cpp.hci.scrapers.koofers.model.professor.KoofersProfessorDTO;
-import edu.cpp.hci.scrapers.koofers.model.rating.KoofersRatingDTO;
 import edu.cpp.hci.scrapers.koofers.model.rating.impl.KoofersRating;
-import edu.cpp.hci.scrapers.koofers.model.rating.impl.KoofersRatingBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class KoofersProfessor implements KoofersProfessorDTO {
 
     private String name;
-    private String period ;
+    private String period;
     private String school;
     private String department;
     private double overallRating;
     private double overallGPA;
     private List<KoofersRating> ratings;
+
     @Override
     public String getName() {
         return name;
@@ -42,7 +40,7 @@ public class KoofersProfessor implements KoofersProfessorDTO {
 
     @Override
     public void setSchool(String school) {
-        this.school =school;
+        this.school = school;
 
     }
 
@@ -61,17 +59,18 @@ public class KoofersProfessor implements KoofersProfessorDTO {
 
     @Override
     public void setOverallRating(double overallRating) {
-    this.overallRating = overallRating;
+        this.overallRating = overallRating;
+    }
+
+    //@Override
+    public List<KoofersRating> getRatings() {
+        return ratings;
     }
 
     @Override
-  public void setRatings(List<KoofersRating> ratings)   {
-        this.ratings=ratings;
+    public void setRatings(List<KoofersRating> ratings) {
+        this.ratings = ratings;
     }
-
-
-    //@Override
-   public List<KoofersRating> getRatings() {         return ratings;     }
 
     public double getOverallGPA() {
         return overallGPA;
