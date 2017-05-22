@@ -49,33 +49,6 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
         return results;
     }
 
-    public static void main(String[] args) {
-        try {
-            System.out.println(new KoofersWebScraper("Craig Rich", School.CAL_POLY_POMONA).getJson());
-        } catch (IOException | NoProfessorException | NoResultsException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    // TODO: 5/17/2017 don't make it static
-    public static String getURL(String professorName, School school)throws IOException{
-        String resultLink;
-        Document GSearch =Jsoup.connect("https://www.google.com/search?q=craig+rich+cal+poly+pomona+site%3Akoofers.com").userAgent("Mozilla").get();
-        Elements search=GSearch.select("div[id*=center_col]");
-       // resultLink =search.text();
-        Element subsearch =search.select("div[id*=rso]").get(0);
-        resultLink =subsearch.text();
-       Elements link = subsearch.getElementsByAttributeValue("class","r");
-       // Elements link=subsearch.select("div.href");
-       //  resultLink=link.text();
-        //System.out.println("link");
-
-
-
-        return "https://www.koofers.com/california-state-polytechnic-university-pomona-csupomona/instructors/young-145216/";
-    }
-
     public String getProfessorURL() throws IOException, KoofersNoProfessorException {
         String query = BING_BASE_URL + "koofers+" + URLEncoder.encode(getSchool() + " " + getProfessor(), "UTF-8");
         Document doc = Jsoup.connect(query).get();
@@ -132,12 +105,6 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
             }
             krb.setReviewText(reviewText.substring(0,index));
 
-
-            Elements date = singleReview.select("div.right");
-            String reviewDate = date.get(0).select("div.rated_by").text();
-            String rDate[] = reviewDate.split("on");
-            String uReviewDate =rDate[1];
-//            krb.set(uReviewDate);
             reviewList.add(krb);
         }
         return reviewList;
