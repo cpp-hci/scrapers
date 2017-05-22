@@ -88,8 +88,10 @@ test();
         Document GSearch =Jsoup.connect("https://www.google.com/search?q=craig+rich+cal+poly+pomona+site%3Akoofers.com&oq=craig+rich+cal+poly+pomona+site%3Akoofers.com").userAgent("Mozilla").get();
         Elements search=GSearch.select("div[id*=center_col]");
         Element subsearch =search.get(0);
-     Elements Ssubsearch = subsearch.getElementsByAttributeValue("href","koofers");
-       // Elements link=subsearch.select("div.g");
+     //   Elements Ssubsearch = subsearch.getElementsByAttributeValue("class","g");
+
+        Elements link=subsearch.select("div.g");
+
         resultLink=link.text();
         System.out.println(resultLink);
 
