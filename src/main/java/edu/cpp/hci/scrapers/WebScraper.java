@@ -2,6 +2,7 @@ package edu.cpp.hci.scrapers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cpp.hci.scrapers.constants.School;
+import edu.cpp.hci.scrapers.exceptions.NoProfessorException;
 import edu.cpp.hci.scrapers.exceptions.NoResultsException;
 
 import java.io.IOException;
@@ -27,7 +28,7 @@ public abstract class WebScraper<E> {
         return professor;
     }
 
-    public void setProfessor(String professor) throws NoResultsException, IOException {
+    public void setProfessor(String professor) throws NoResultsException, IOException, NoProfessorException {
         this.professor = professor;
         refresh();
     }
@@ -36,35 +37,35 @@ public abstract class WebScraper<E> {
         return school;
     }
 
-    public void setSchool(String school) throws NoResultsException, IOException {
+    public void setSchool(String school) throws NoResultsException, IOException, NoProfessorException {
         this.school = school;
         refresh();
     }
 
-    public void setSchool(School school) throws NoResultsException, IOException {
+    public void setSchool(School school) throws NoResultsException, IOException, NoProfessorException {
         this.school = school.toString();
         refresh();
     }
 
-    public String getJson() throws NoResultsException, IOException {
+    public String getJson() throws NoResultsException, IOException, NoProfessorException {
         if (json == null) {
             refresh();
         }
         return json;
     }
 
-    public List<E> getData() throws NoResultsException, IOException {
+    public List<E> getData() throws NoResultsException, IOException, NoProfessorException {
         if (data == null) {
             refresh();
         }
         return data;
     }
 
-    public void refresh() throws NoResultsException, IOException {
+    public void refresh() throws NoResultsException, IOException, NoProfessorException {
         data = fetch();
         json = new ObjectMapper().writeValueAsString(data);
     }
 
-    public abstract List<E> fetch() throws NoResultsException, IOException;
+    public abstract List<E> fetch() throws NoResultsException, IOException, NoProfessorException;
 
 }

@@ -3,6 +3,7 @@ package edu.cpp.hci.scrapers.rmp;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cpp.hci.scrapers.WebScraper;
 import edu.cpp.hci.scrapers.constants.School;
+import edu.cpp.hci.scrapers.exceptions.NoProfessorException;
 import edu.cpp.hci.scrapers.exceptions.NoResultsException;
 import edu.cpp.hci.scrapers.rmp.model.professor.RMPProfessorBuilder;
 import edu.cpp.hci.scrapers.rmp.model.professor.RMPProfessorDTO;
@@ -31,15 +32,11 @@ public class RateMyProfessorWebScaper extends WebScraper<RMPProfessorDTO> {
         super(professor, school);
     }
 
-    public RateMyProfessorWebScaper(String professor, String school) {
-        super(professor, school);
-    }
-
-    private List<Integer> fetchProfessorID() throws IOException, RateMyProfessorNoResultsException {
+    private List<Integer> fetchProfessorID() throws IOException, NoProfessorException {
         Document connection = fetchQueryConnection(getProfessor(), getSchool());
         Elements elements = connection.select("a[href*=" + SHOW_RATINGS_URL + "]");
         if (elements.size() < 1) {
-            throw new RateMyProfessorNoResultsException();
+            throw new NoProfessorException();
         }
         return elements.stream()
             .map(item -> item.attr("href").substring(SHOW_RATINGS_URL.length()))
@@ -54,7 +51,7 @@ public class RateMyProfessorWebScaper extends WebScraper<RMPProfessorDTO> {
 
     @Override
     public List<RMPProfessorDTO> fetch()
-            throws NoResultsException, IOException {
+            throws NoResultsException, IOException, NoProfessorException {
         List<Integer> professorIDs = fetchProfessorID();
         List<RMPProfessorDTO> profs = new ArrayList<>();
         for (Integer professorID : professorIDs) {
@@ -64,13 +61,16 @@ public class RateMyProfessorWebScaper extends WebScraper<RMPProfessorDTO> {
         return profs;
     }
 
-    private RMPProfessorDTO fetchProfessorData(int professorID) throws IOException {
+    private RMPProfessorDTO fetchProfessorData(int professorID) throws IOException, RateMyProfessorNoResultsException {
         RMPProfessorBuilder professorBuilder = new RMPProfessorBuilder().setId(professorID);
         professorBuilder.setName(getProfessor());
         professorBuilder.setSchool(getSchool());
         int remaining, page = 1;
         do {
             RateMyProfessorResultRawJsonDTO result = fetchRawProfessorData(professorID, page);
+            if(result.getRatings().size() == 0 && page == 1) {
+                throw new RateMyProfessorNoResultsException();
+            }
             result.getRatings().stream()
                     .map(RMPRatingBuilder::copyFromRawJson)
                     .forEach(professorBuilder::withReview);
