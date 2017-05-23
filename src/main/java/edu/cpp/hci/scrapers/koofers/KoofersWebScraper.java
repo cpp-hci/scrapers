@@ -7,6 +7,7 @@ import edu.cpp.hci.scrapers.exceptions.NoResultsException;
 import edu.cpp.hci.scrapers.koofers.exceptions.KoofersNoProfessorException;
 import edu.cpp.hci.scrapers.koofers.model.professor.KoofersProfessorDTO;
 import edu.cpp.hci.scrapers.koofers.model.professor.impl.KoofersProfessor;
+import edu.cpp.hci.scrapers.koofers.model.rating.KoofersRatingDTO;
 import edu.cpp.hci.scrapers.koofers.model.rating.impl.KoofersRating;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,7 +36,6 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
     @Override
     public List<KoofersProfessorDTO> fetch() throws NoResultsException, IOException, NoProfessorException {
         String professorURL = getProfessorURL();
-        System.out.println(professorURL);
         Document doc = Jsoup.connect(professorURL).get();
         KoofersProfessor professor = new KoofersProfessor();
         List<KoofersProfessorDTO> results = new ArrayList<>();
@@ -81,9 +81,9 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
         return url.substring(KOOFERS_BASE_URL.length() - 1, url.lastIndexOf('/'));
     }
 
-    public List<KoofersRating> getRatings(String professorURL) throws IOException {
+    public List<KoofersRatingDTO> getRatings(String professorURL) throws IOException {
         Document doc;
-        List<KoofersRating> reviewList = new ArrayList<KoofersRating>();
+        List<KoofersRatingDTO> reviewList = new ArrayList<>();
         doc = Jsoup.connect(professorURL).get();
         Elements reviews = doc.select("div.user_rating_box");
         for (int i = 0; i < reviews.size(); i++) {
