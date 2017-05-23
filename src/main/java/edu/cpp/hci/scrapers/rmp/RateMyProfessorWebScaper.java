@@ -32,6 +32,10 @@ public class RateMyProfessorWebScaper extends WebScraper<RMPProfessorDTO> {
         super(professor, school);
     }
 
+    public RateMyProfessorWebScaper(String professor, String school) {
+        super(professor, school);
+    }
+
     private List<Integer> fetchProfessorID() throws IOException, NoProfessorException {
         Document connection = fetchQueryConnection(getProfessor(), getSchool());
         Elements elements = connection.select("a[href*=" + SHOW_RATINGS_URL + "]");
