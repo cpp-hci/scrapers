@@ -28,6 +28,10 @@ public class KoofersWebScraper extends WebScraper<KoofersProfessorDTO> {
         super(professor, school);
     }
 
+    public KoofersWebScraper(String professor, String school) {
+        super(professor, school);
+    }
+
     @Override
     public List<KoofersProfessorDTO> fetch() throws NoResultsException, IOException, NoProfessorException {
         String professorURL = getProfessorURL();
