@@ -1,7 +1,7 @@
 package edu.cpp.hci.scrapers.koofers.model.professor.impl;
 
 import edu.cpp.hci.scrapers.koofers.model.professor.KoofersProfessorDTO;
-import edu.cpp.hci.scrapers.koofers.model.rating.impl.KoofersRating;
+import edu.cpp.hci.scrapers.koofers.model.rating.KoofersRatingDTO;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class KoofersProfessor implements KoofersProfessorDTO {
     private String department;
     private double overallRating;
     private double overallGPA;
-    private List<KoofersRating> ratings;
+    private List<KoofersRatingDTO> ratings;
 
     @Override
     public String getName() {
@@ -62,13 +62,13 @@ public class KoofersProfessor implements KoofersProfessorDTO {
         this.overallRating = overallRating;
     }
 
-    //@Override
-    public List<KoofersRating> getRatings() {
+    @Override
+    public List<KoofersRatingDTO> getRatings() {
         return ratings;
     }
 
     @Override
-    public void setRatings(List<KoofersRating> ratings) {
+    public void setRatings(List<KoofersRatingDTO> ratings) {
         this.ratings = ratings;
     }
 
