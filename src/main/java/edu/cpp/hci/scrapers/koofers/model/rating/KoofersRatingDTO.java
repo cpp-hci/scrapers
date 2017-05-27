@@ -17,4 +17,8 @@ public interface KoofersRatingDTO {
 
     void setOverallGPA(double overallGPA);
 
+    void setReviewText(String text);
+
+    String getReviewText();
+
 }
