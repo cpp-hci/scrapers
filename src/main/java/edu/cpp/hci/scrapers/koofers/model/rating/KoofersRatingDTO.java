@@ -21,4 +21,8 @@ public interface KoofersRatingDTO {
 
     String getReviewText();
 
+    double getOverallRating();
+
+    void setOverallRating(double overallRating);
+
 }
